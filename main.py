@@ -1,11 +1,12 @@
-import json, requests
-from datetime import date
+import json, requests, sys
+from datetime import datetime
 
 # read config
-config_file = open('./config.json', 'r')
-config_json = config_file.read()
-config = json.loads(config_json)
-config_file.close()
+try:
+    config_file = open('./config.json', 'r')
+    config_json = config_file.read()
+    config = json.loads(config_json)
+    config_file.close()
 
 # fetch github actions
 url = f'https://api.github.com/users/{config["username"]}/events'
