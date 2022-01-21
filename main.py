@@ -13,11 +13,13 @@ response = requests.get(url)
 actions = response.json()
 
 # get log name with current date
-today = date.today()
-filename = f'{today.strftime("%Y-%m-%d")}.log.md'
+now = datetime.now()
+filename = f'{now.strftime("%Y-%m-%d")}.log.md'
 
 # create log file
 file = open(f'./logs/{filename}', 'w')
+header = f'# {now.strftime("%A, %B %d, %Y %I:%M %p")}\n\n'
+file.write(header)
 
 # write log file
 for action in actions:
@@ -27,7 +29,8 @@ for action in actions:
         commits = payload['commits']
         for commit in commits:
             message = commit['message']
-            file.write(message)
+            message = message.strip('.')
+            file.write(f'- [X] {message}\n')
 
 # close log file
 file.close()
