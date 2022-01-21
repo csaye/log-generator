@@ -18,4 +18,16 @@ filename = f'{today.strftime("%Y-%m-%d")}.log.md'
 
 # create log file
 file = open(f'./logs/{filename}', 'w')
+
+# write log file
+for action in actions:
+    type = action['type']
+    if type == 'PushEvent':
+        payload = action['payload']
+        commits = payload['commits']
+        for commit in commits:
+            message = commit['message']
+            file.write(message)
+
+# close log file
 file.close()
