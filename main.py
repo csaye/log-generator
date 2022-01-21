@@ -15,9 +15,13 @@ except json.decoder.JSONDecodeError:
     sys.exit()
 
 # fetch github actions
-url = f'https://api.github.com/users/{config["username"]}/events'
-response = requests.get(url)
-actions = response.json()
+try:
+    url = f'https://api.github.com/users/{config["username"]}/events'
+    response = requests.get(url)
+    actions = response.json()
+except ConnectionRefusedError:
+    print('github connection refused')
+    sys.exit()
 
 # get log name with current date
 now = datetime.now()
