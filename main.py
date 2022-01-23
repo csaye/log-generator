@@ -46,6 +46,12 @@ for action in actions:
         created = created.replace('T', ' ').replace('Z', '')
         created = datetime.strptime(created, '%Y-%m-%d %H:%M:%S')
         created = created.replace(tzinfo=timezone.utc).astimezone(tz=None)
+        if log_date != created.date(): continue
+        # get repo name
+        repo = action['repo']
+        repo_name = repo['name']
+        repo_name = repo_name.split('/')[1]
+        # get commits
         payload = action['payload']
         commits = payload['commits']
         for commit in commits:
