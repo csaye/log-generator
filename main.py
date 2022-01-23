@@ -14,6 +14,12 @@ except json.decoder.JSONDecodeError:
     print('invalid config.json')
     sys.exit()
 
+# get date
+log_date = sys.argv[1] if len(sys.argv) > 1 else 'today'
+if log_date == 'today': log_date = date.today()
+elif log_date == 'yesterday': log_date = date.today() - timedelta(days=1)
+else: log_date = datetime.strptime(log_date, '%Y-%m-%d').date()
+
 # fetch github actions
 try:
     url = f'https://api.github.com/users/{config["username"]}/events'
@@ -22,12 +28,6 @@ try:
 except ConnectionRefusedError:
     print('github connection refused')
     sys.exit()
-
-# check for custom date
-log_date = sys.argv[1] if len(sys.argv) > 1 else 'today'
-if log_date == 'today': log_date = date.today()
-elif log_date == 'yesterday': log_date = date.today() - timedelta(days=1)
-else: log_date = datetime.strptime(log_date, '%Y-%m-%d').date()
 
 # get log name with current date
 filename = f'{log_date.strftime("%Y-%m-%d")}.log.md'
