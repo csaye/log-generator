@@ -1,5 +1,5 @@
 import json, requests, sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 # read config
 try:
@@ -36,6 +36,11 @@ file.write(header)
 for action in actions:
     type = action['type']
     if type == 'PushEvent':
+        # get creation date
+        created = action['created_at']
+        created = created.replace('T', ' ').replace('Z', '')
+        created = datetime.strptime(created, '%Y-%m-%d %H:%M:%S')
+        created = created.replace(tzinfo=timezone.utc).astimezone(tz=None)
         payload = action['payload']
         commits = payload['commits']
         for commit in commits:
