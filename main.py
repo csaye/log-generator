@@ -23,13 +23,18 @@ except ConnectionRefusedError:
     print('github connection refused')
     sys.exit()
 
+# check for custom date
+log_date = sys.argv[1] if len(sys.argv) > 1 else 'today'
+if log_date == 'today': log_date = date.today()
+elif log_date == 'yesterday': log_date = date.today() - timedelta(days=1)
+else: log_date = datetime.strptime(log_date, '%Y-%m-%d').date()
+
 # get log name with current date
-now = datetime.now()
-filename = f'{now.strftime("%Y-%m-%d")}.log.md'
+filename = f'{log_date.strftime("%Y-%m-%d")}.log.md'
 
 # create log file
 file = open(f'./logs/{filename}', 'w')
-header = f'# {now.strftime("%A, %B %d, %Y %I:%M %p")}\n\n'
+header = f'# {log_date.strftime("%A, %B %d, %Y %I:%M %p")}\n\n'
 file.write(header)
 
 # write log file
