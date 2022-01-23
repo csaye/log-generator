@@ -1,0 +1,14 @@
+{
+  "username": "YOUR_USERNAME_HERE",
+  "on_phrases": [
+    "Working on"
+  ],
+  "off_phrases": [
+    "Implemented"
+  ],
+  "close_phrases": [
+    "One thing I learned was",
+    "One thing I'm still confused about is",
+    "One thing I had trouble with was"
+  ]
+}
