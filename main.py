@@ -1,5 +1,5 @@
 import json, requests, sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 # read config
 try:
@@ -18,7 +18,12 @@ except json.decoder.JSONDecodeError:
 log_date = sys.argv[1] if len(sys.argv) > 1 else 'today'
 if log_date == 'today': log_date = date.today()
 elif log_date == 'yesterday': log_date = date.today() - timedelta(days=1)
-else: log_date = datetime.strptime(log_date, '%Y-%m-%d').date()
+else:
+    try:
+        log_date = datetime.strptime(log_date, '%Y-%m-%d').date()
+    except ValueError:
+        print('invalid date given (YYYY-MM-DD)')
+        sys.exit()
 
 # fetch github actions
 try:
