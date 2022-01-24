@@ -30,7 +30,7 @@ try:
     url = f'https://api.github.com/users/{config["username"]}/events'
     response = requests.get(url)
     actions = response.json()
-except ConnectionRefusedError:
+except requests.exceptions.ConnectionError:
     print('github connection refused')
     sys.exit()
 
