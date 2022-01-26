@@ -10,5 +10,14 @@
     "One thing I learned was",
     "One thing I'm still confused about is",
     "One thing I had trouble with was"
-  ]
+  ],
+  "times": {
+    "Monday": ["8:00 AM", "8:40 AM"],
+    "Tuesday": ["6:00 PM", "9:00 PM"],
+    "Wednesday": ["10:20 AM", "11:40 AM"],
+    "Thursday": ["6:00 PM", "9:00 PM"],
+    "Friday": ["12:00 PM", "1:20 PM"],
+    "Saturday": ["6:00 PM", "9:00 PM"],
+    "Sunday": ["6:00 PM", "9:00 PM"]
+  }
 }
