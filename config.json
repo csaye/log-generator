@@ -1,10 +1,15 @@
 {
   "username": "YOUR_USERNAME_HERE",
+  "message_count": 12,
   "on_phrases": [
-    "Working on"
+    "Implementing some new features for",
+    "Starting some work on new parts of",
+    "Continuing some work on features for"
   ],
   "off_phrases": [
-    "Implemented"
+    "Worked on implementing some parts of",
+    "Finished some new features for",
+    "Made good progress on some new parts of"
   ],
   "close_phrases": [
     "One thing I learned was",
