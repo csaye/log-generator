@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python3 ./main.py $1
+python3 ./byrepo.py $1 $2
