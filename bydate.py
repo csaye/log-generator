@@ -77,9 +77,26 @@ file.write(f'{header} {times[0]}\n')
 for message in messages:
     file.write(f'- [ ] {message}\n')
 
+# write on phrase
+on_phrases = config['on_phrases']
+on_phrase = choice(on_phrases)
+file.write(f'\n{on_phrase} {repo}.\n\n')
+
 # close log
 file.write(f'{header} {times[1]}\n')
 for message in messages:
     file.write(f'- [X] {message}\n')
+
+# write off phrase
+off_phrases = config['off_phrases']
+off_phrase = choice(off_phrases)
+file.write(f'\n{off_phrase} {repo}.\n')
+
+# write close phrase
+close_phrases = config['close_phrases']
+close_phrase = choice(close_phrases)
+message = choice(messages)
+file.write(f'{close_phrase} {message.lower()}.\n')
+
 # close log file
 file.close()
