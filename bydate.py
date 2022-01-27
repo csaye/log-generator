@@ -67,5 +67,14 @@ shuffle(messages)
 message_count = config["message_count"]
 messages = messages[:message_count]
 
+# open log file
+filename = f'{log_date.strftime("%Y-%m-%d")}.log.md'
+file = open(f'./logs/{filename}', 'w')
+header = f'# {log_date.strftime("%A, %B %d, %Y")}'
+
+# open log
+file.write(f'{header} {times[0]}\n')
+for message in messages:
+    file.write(f'- [ ] {message}\n')
 # close log file
 file.close()
