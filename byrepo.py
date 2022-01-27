@@ -45,3 +45,8 @@ try:
 except requests.exceptions.ConnectionError:
     print('github connection refused')
     sys.exit()
+
+# return if invalid repository
+if type(actions) != list:
+    print('invalid repo')
+    sys.exit()
