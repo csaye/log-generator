@@ -1,4 +1,5 @@
 import json, requests, sys
+from datetime import date, datetime, timedelta, timezone
 
 # read config
 try:
@@ -35,3 +36,12 @@ times = config['times'][day_name]
 
 # get repo
 repo = sys.argv[2]
+
+# fetch github events
+try:
+    url = f'https://api.github.com/repos/{config["username"]}/{repo}/events'
+    response = requests.get(url)
+    actions = response.json()
+except requests.exceptions.ConnectionError:
+    print('github connection refused')
+    sys.exit()
