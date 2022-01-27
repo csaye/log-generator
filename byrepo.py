@@ -1,5 +1,6 @@
 import json, requests, sys
 from datetime import date, datetime, timedelta, timezone
+from random import shuffle, choice
 
 # read config
 try:
@@ -63,3 +64,8 @@ for action in actions:
             message = commit['message']
             message = message.strip('.')
             messages.append(message)
+
+# choose messages
+shuffle(messages)
+message_count = config["message_count"]
+messages = messages[:message_count]
