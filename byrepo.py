@@ -79,3 +79,11 @@ header = f'# {log_date.strftime("%A, %B %d, %Y")}'
 file.write(f'{header} {times[0]}\n')
 for message in messages:
     file.write(f'- [ ] {message}\n')
+
+# close log
+file.write(f'{header} {times[1]}\n')
+for message in messages:
+    file.write(f'- [X] {message}\n')
+
+# close log file
+file.close()
