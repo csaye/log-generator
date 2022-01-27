@@ -12,3 +12,11 @@ except FileNotFoundError:
 except json.decoder.JSONDecodeError:
     print('invalid config.json')
     sys.exit()
+
+# check for arguments
+if len(sys.argv) < 3:
+    print('date and repo arguments must be given')
+    sys.exit()
+
+# get repo
+repo = sys.argv[2]
