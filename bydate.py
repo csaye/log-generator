@@ -39,6 +39,8 @@ except requests.exceptions.ConnectionError:
     print('github connection refused')
     sys.exit()
 
+# get commit messages
+messages = []
 for action in actions:
     type = action['type']
     if type == 'PushEvent':
@@ -50,15 +52,20 @@ for action in actions:
         if log_date != created.date(): continue
         # get repo name
         repo = action['repo']
-        repo_name = repo['name']
-        repo_name = repo_name.split('/')[1]
+        repo = repo['name']
+        repo = repo.split('/')[1]
         # get commits
         payload = action['payload']
         commits = payload['commits']
         for commit in commits:
             message = commit['message']
             message = message.strip('.')
-            file.write(f'- [X] {message}\n')
+            messages.append(message)
+
+# choose messages
+shuffle(messages)
+message_count = config["message_count"]
+messages = messages[:message_count]
 
 # close log file
 file.close()
