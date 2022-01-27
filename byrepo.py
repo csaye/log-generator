@@ -50,3 +50,16 @@ except requests.exceptions.ConnectionError:
 if type(actions) != list:
     print('invalid repo')
     sys.exit()
+
+# get commit messages
+messages = []
+for action in actions:
+    type = action['type']
+    if type == 'PushEvent':
+        # get commits
+        payload = action['payload']
+        commits = payload['commits']
+        for commit in commits:
+            message = commit['message']
+            message = message.strip('.')
+            messages.append(message)
