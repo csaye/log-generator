@@ -1,5 +1,6 @@
 import json, requests, sys
 from datetime import date, datetime, timedelta, timezone
+from random import shuffle, choice
 
 # read config
 try:
@@ -25,6 +26,10 @@ else:
         print('invalid date given (YYYY-MM-DD)')
         sys.exit()
 
+# get times
+day_name = log_date.strftime('%A')
+times = config['times'][day_name]
+
 # fetch github actions
 try:
     url = f'https://api.github.com/users/{config["username"]}/events'
@@ -34,15 +39,6 @@ except requests.exceptions.ConnectionError:
     print('github connection refused')
     sys.exit()
 
-# get log name with current date
-filename = f'{log_date.strftime("%Y-%m-%d")}.log.md'
-
-# create log file
-file = open(f'./logs/{filename}', 'w')
-header = f'# {log_date.strftime("%A, %B %d, %Y %I:%M %p")}\n\n'
-file.write(header)
-
-# write log file
 for action in actions:
     type = action['type']
     if type == 'PushEvent':
