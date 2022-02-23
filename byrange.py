@@ -77,3 +77,17 @@ for i in range(config['max_iterations']):
     shuffle(messages)
     message_count = config["message_count"]
     messages = messages[:message_count]
+
+    # rename repo and get commit ending
+    repo = '/'.join(repo.split('/')[1:])
+    ending = f'{log_date.strftime("%b %-d")} ({times[2]})'
+
+    # open log file
+    filename = f'{log_date.strftime("%Y-%m-%d")}.log.md'
+    file = open(f'./logs/{filename}', 'w')
+    header = f'# {log_date.strftime("%A, %B %d, %Y")}'
+
+    # open log
+    file.write(f'{header} {times[0]}\n')
+    for message in messages:
+        file.write(f'- [ ] {message}\n')
