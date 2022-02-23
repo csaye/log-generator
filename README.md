@@ -6,4 +6,4 @@ Generates logs of GitHub work.
 
 `chmod +x gen.sh`
 
-`./gen.sh <today | yesterday | YYYY-MM-DD> <repo>`
+`./gen.sh <repo | date | range> [date (YYYY-MM-DD)] [repo]`
