@@ -117,6 +117,20 @@ for i in range(config['max_iterations']):
     off_phrases = config['off_phrases']
     off_phrase = choice(off_phrases)
     file.write(f'\n{off_phrase} {repo}.\n')
+
+    # write close phrase
+    close_phrases = config['close_phrases']
+    close_phrase = choice(close_phrases)
+    message = choice(messages)
+    file.write(f'{close_phrase} {message.lower()}.\n')
+
+    # close log file
+    file.close()
+
+    # make commit
+    system(f'git add logs/{filename}')
+    system(f'git commit -m "docs: Add sign off for {ending})"')
+
     # update date
     if log_date == end_date: break
     log_date += timedelta(days=1)
