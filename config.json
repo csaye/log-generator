@@ -1,5 +1,9 @@
 {
-  "username": "YOUR_USERNAME_HERE",
+  "username": "",
+  "repos": [],
+  "start_date": "2022-01-01",
+  "end_date": "2022-01-01",
+  "max_iterations": 32,
   "message_count": 12,
   "on_phrases": [
     "Implementing some new features for",
