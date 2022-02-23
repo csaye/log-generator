@@ -1,4 +1,6 @@
 import json, requests, sys
+from datetime import date, datetime, timedelta, timezone
+from random import shuffle, choice
 
 # read config
 try:
@@ -32,3 +34,13 @@ except ValueError:
     sys.exit()
 
 log_date = start_date
+
+# run for maximum iterations
+for i in range(config['max_iterations']):
+
+    # get repo
+    repo = choice(config['repos'])
+
+    # get times
+    day_name = log_date.strftime('%A')
+    times = config['times'][day_name]
