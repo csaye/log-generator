@@ -1,6 +1,7 @@
 import json, requests, sys
 from datetime import date, datetime, timedelta, timezone
 from random import shuffle, choice
+from os import system
 
 # read config
 try:
@@ -91,3 +92,15 @@ for i in range(config['max_iterations']):
     file.write(f'{header} {times[0]}\n')
     for message in messages:
         file.write(f'- [ ] {message}\n')
+
+    # write on phrase
+    on_phrases = config['on_phrases']
+    on_phrase = choice(on_phrases)
+    file.write(f'\n{on_phrase} {repo}.\n')
+
+    # close file
+    file.close()
+
+    # make commit
+    system(f'git add logs/{filename}')
+    system(f'git commit -m "docs: Add sign on for {ending}"')
