@@ -104,3 +104,7 @@ for i in range(config['max_iterations']):
     # make commit
     system(f'git add logs/{filename}')
     system(f'git commit -m "docs: Add sign on for {ending}"')
+
+    # update date
+    if log_date == end_date: break
+    log_date += timedelta(days=1)
