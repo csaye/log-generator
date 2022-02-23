@@ -44,3 +44,18 @@ for i in range(config['max_iterations']):
     # get times
     day_name = log_date.strftime('%A')
     times = config['times'][day_name]
+
+    # fetch github events
+    try:
+        url = f'https://api.github.com/repos/{repo}/events'
+        response = requests.get(url)
+        actions = response.json()
+    # handle connection error
+    except requests.exceptions.ConnectionError:
+        print('github connection refused')
+        sys.exit()
+
+    # return if invalid repository
+    if type(actions) != list:
+        print('invalid repo')
+        sys.exit()
