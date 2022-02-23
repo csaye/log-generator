@@ -105,6 +105,18 @@ for i in range(config['max_iterations']):
     system(f'git add logs/{filename}')
     system(f'git commit -m "docs: Add sign on for {ending}"')
 
+    # open log file
+    file = open(f'./logs/{filename}', 'a')
+
+    # close log
+    file.write(f'\n{header} {times[1]}\n')
+    for message in messages:
+        file.write(f'- [X] {message}\n')
+
+    # write off phrase
+    off_phrases = config['off_phrases']
+    off_phrase = choice(off_phrases)
+    file.write(f'\n{off_phrase} {repo}.\n')
     # update date
     if log_date == end_date: break
     log_date += timedelta(days=1)
