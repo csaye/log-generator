@@ -59,3 +59,21 @@ for i in range(config['max_iterations']):
     if type(actions) != list:
         print('invalid repo')
         sys.exit()
+
+    # get commit messages
+    messages = []
+    for action in actions:
+        action_type = action['type']
+        if action_type == 'PushEvent':
+            # get commits
+            payload = action['payload']
+            commits = payload['commits']
+            for commit in commits:
+                message = commit['message']
+                message = message.strip('.')
+                messages.append(message)
+
+    # choose messages
+    shuffle(messages)
+    message_count = config["message_count"]
+    messages = messages[:message_count]
